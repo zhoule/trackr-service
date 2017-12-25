@@ -1,0 +1,80 @@
+
+buildscript {
+    ext {
+        springBootVersion = '1.4.3.RELEASE'
+        jrebelVersion = '1.1.5'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath ("org.zeroturnaround:gradle-jrebel-plugin:${jrebelVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'rebel'
+apply plugin: 'war'
+
+jar {
+    baseName = 'trackr'
+    version = '0.0.1-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    /**
+     * Apache common
+     */
+    compile 'org.apache.commons:commons-lang3:3.5'
+
+    /**
+     * Lombok
+     */
+    compile 'org.projectlombok:lombok:1.16.14'
+
+    /**
+     * Jackson
+     */
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.6'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.6'
+
+    /**
+     * Validation
+     */
+    compile 'javax.validation:validation-api:1.1.0.Final'
+    /**
+     * Spring oAuth2
+     */
+    compile 'org.springframework.security.oauth:spring-security-oauth2:2.0.12.RELEASE'
+
+
+
+    /**
+     * Swagger
+     */
+    compile 'io.springfox:springfox-swagger2:2.6.1'
+    compile 'io.springfox:springfox-swagger-ui:2.6.1'
+
+    /**
+     * Spring boot
+     */
+    compile('org.springframework.boot:spring-boot-starter-hateoas')
+    compile('org.springframework.boot:spring-boot-starter-web'){
+        exclude module: "spring-boot-starter-tomcat"
+    }
+    compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+    compile('org.springframework.boot:spring-boot-starter-security')
+    compile("org.springframework.boot:spring-boot-starter-jetty")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
